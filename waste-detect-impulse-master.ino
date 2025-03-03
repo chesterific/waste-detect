@@ -12,26 +12,27 @@
 #define FLASH_OUTPUT 4
 #define WASTE_OUTPUT 13
 
-#if defined(CAMERA_MODEL_ESP_EYE)
-#define PWDN_GPIO_NUM    -1
-#define RESET_GPIO_NUM   -1
-#define XCLK_GPIO_NUM    4
-#define SIOD_GPIO_NUM    18
-#define SIOC_GPIO_NUM    23
+// #if defined(CAMERA_MODEL_ESP_EYE)
+// #define PWDN_GPIO_NUM    -1
+// #define RESET_GPIO_NUM   -1
+// #define XCLK_GPIO_NUM    4
+// #define SIOD_GPIO_NUM    18
+// #define SIOC_GPIO_NUM    23
 
-#define Y9_GPIO_NUM      36
-#define Y8_GPIO_NUM      37
-#define Y7_GPIO_NUM      38
-#define Y6_GPIO_NUM      39
-#define Y5_GPIO_NUM      35
-#define Y4_GPIO_NUM      14
-#define Y3_GPIO_NUM      13
-#define Y2_GPIO_NUM      34
-#define VSYNC_GPIO_NUM   5
-#define HREF_GPIO_NUM    27
-#define PCLK_GPIO_NUM    25
+// #define Y9_GPIO_NUM      36
+// #define Y8_GPIO_NUM      37
+// #define Y7_GPIO_NUM      38
+// #define Y6_GPIO_NUM      39
+// #define Y5_GPIO_NUM      35
+// #define Y4_GPIO_NUM      14
+// #define Y3_GPIO_NUM      13
+// #define Y2_GPIO_NUM      34
+// #define VSYNC_GPIO_NUM   5
+// #define HREF_GPIO_NUM    27
+// #define PCLK_GPIO_NUM    25
 
-#elif defined(CAMERA_MODEL_AI_THINKER)
+// #elif defined(CAMERA_MODEL_AI_THINKER)
+#if defined(CAMERA_MODEL_AI_THINKER)
 #define PWDN_GPIO_NUM     32
 #define RESET_GPIO_NUM    -1
 #define XCLK_GPIO_NUM      0
@@ -103,7 +104,7 @@ void ei_camera_deinit(void);
 bool ei_camera_capture(uint32_t img_width, uint32_t img_height, uint8_t *out_buf) ;
 
 /**
-* @brief      Arduino setup function
+* @brief  
 */
 void setup()
 {
@@ -113,9 +114,9 @@ void setup()
     digitalWrite(FLASH_OUTPUT, LOW);
     digitalWrite(WASTE_OUTPUT, LOW);
     
-    // put your setup code here, to run once:
+    
     Serial.begin(115200);
-    //comment out the below line to start inference immediately after upload
+    //inference
     while (!Serial);
     Serial.println("Edge Impulse Inferencing Demo");
     if (ei_camera_init() == false) {
@@ -133,7 +134,6 @@ void setup()
 void loop()
 {
 
-    // instead of wait_ms, we'll wait on the signal, this allows threads to cancel us...
     if (ei_sleep(5) != EI_IMPULSE_OK) {
         return;
     }
